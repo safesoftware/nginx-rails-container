@@ -10,4 +10,4 @@ RUN mkdir -p /tmp/sockets $NGINX_WWW
 
 COPY nginx.conf.template /etc/nginx/conf.d/nginx.conf.template
 
-CMD /bin/bash -c "envsubst '\$NGINX_WWW \$WORKER_PROCESSES \$SERVER_NAME \$CLIENT_MAX_BODY_SIZE' < /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+CMD ["bash", "-c", "envsubst '$NGINX_WWW $WORKER_PROCESSES $SERVER_NAME $CLIENT_MAX_BODY_SIZE' < /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"]
