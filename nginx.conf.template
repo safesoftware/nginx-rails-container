@@ -47,8 +47,6 @@ http {
 
     server_name ${SERVER_NAME};
 
-    access_log	/dev/stdout;
-
     keepalive_timeout 5;
 
     root ${NGINX_WWW};
