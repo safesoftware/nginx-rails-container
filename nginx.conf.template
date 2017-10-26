@@ -89,10 +89,18 @@ http {
       proxy_pass http://unicorn;
     }
 
-    location ~* \.(ico|css|js|gif|jpe?g|png|woff?2)(\?[0-9]+)?$ {
+    location ~* \.(ico|css|js|gif|jpe?g|png)(\?[0-9]+)?$ {
         expires max;
         access_log off;
     }
+
+    # Fonts requested through CSS require CORS header
+    location ~* \.(?:ttf|ttc|otf|eot|woff2|woff|font.css)$ {
+      add_header "Access-Control-Allow-Origin" "*";
+      expires max;
+      access_log off;
+      add_header Cache-Control "public";
+    } 
 
     error_page 500 502 503 504 /500.html;
   }
